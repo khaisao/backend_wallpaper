@@ -13,6 +13,10 @@ const Category = sequelize.define('category', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+    },
+    thumbnail:{
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 }, {
     timestamps: false,

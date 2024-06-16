@@ -18,6 +18,17 @@ Category.belongsToMany(Wallpaper, { through: ItemCategory, foreignKey: 'category
 Wallpaper.belongsTo(ItemType, { foreignKey: 'type_id', targetKey: 'id' });
 ItemType.hasMany(Wallpaper, { foreignKey: 'type_id', sourceKey: 'id' });
 
+const categoryRoutes = require('./routes/category');
+
+app.use('/api/category', categoryRoutes);
+
+app.get('/', (req, res) => {
+    res.send('Hello Wallpaper!')
+})
+app.listen(port, () => {
+    console.log("Listening on port " + port)
+})
+
 sequelize.sync()
     .then(result => {
         console.log('Database & tables created!');
@@ -25,7 +36,3 @@ sequelize.sync()
     .catch(err => {
         console.log(err);
     });
-
-app.listen(port, () => {
-    console.log("Listening on port " + port)
-})
