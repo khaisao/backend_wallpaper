@@ -7,20 +7,30 @@ require('dotenv').config()
 
 const port = process.env.PORT || 5000
 
+app.use(express.json()); // Đối với dữ liệu JSON
+app.use(express.urlencoded({extended: true}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 const Wallpaper = require('./models/wallpaper');
 const Category = require('./models/category');
 const ItemCategory = require('./models/item-category');
-const ItemType = require('./models/item-type');
+const ItemCountry = require('./models/item-country');
+const Country = require('./models/country');
 
-Wallpaper.belongsToMany(Category, { through: ItemCategory, foreignKey: 'item_id' });
-Category.belongsToMany(Wallpaper, { through: ItemCategory, foreignKey: 'category_id' });
+Wallpaper.belongsToMany(Category, { through: ItemCategory, foreignKey: 'wallpaperId' });
+Category.belongsToMany(Wallpaper, { through: ItemCategory, foreignKey: 'categoryId' });
 
-Wallpaper.belongsTo(ItemType, { foreignKey: 'type_id', targetKey: 'id' });
-ItemType.hasMany(Wallpaper, { foreignKey: 'type_id', sourceKey: 'id' });
+Wallpaper.belongsToMany(Country, { through: ItemCountry, foreignKey: 'wallpaperId' });
+Country.belongsToMany(Wallpaper, { through: ItemCountry, foreignKey: 'countryId' });
+
 
 const categoryRoutes = require('./routes/category');
+const wallpaperRoutes = require('./routes/wallpaper');
+const countryRoutes = require('./routes/country');
 
 app.use('/api/category', categoryRoutes);
+app.use('/api/wallpaper', wallpaperRoutes);
+app.use('/api/country', countryRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello Wallpaper!')

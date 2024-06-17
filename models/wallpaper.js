@@ -13,21 +13,21 @@ const Wallpaper = sequelize.define('wallpaper', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    file_path: {
+    filePath: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    type_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'item_types', // Name of the table that stores item types
-            key: 'id'
-        }
+    isHot:{
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
     },
-    created_at: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+    isRecommend:{
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+    },
+    isPremium:{
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
     }
 });
 

@@ -21,10 +21,9 @@ exports.uploadCategory = (req, res, next) => {
 exports.getCategory = (req, res, next) => {
     Category.findAll().then(result => {
         sendResponse(res, result);
-    })
-        .catch(err => {
-            sendResponse(res, [], [error.message], 500);
-        });
+    }).catch(err => {
+        sendResponse(res, [], [error.message], 500);
+    });
 };
 
 exports.deleteCategory = (req, res, next) => {

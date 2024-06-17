@@ -8,7 +8,7 @@ const ItemCategory = sequelize.define('item_category', {
         allowNull: false,
         primaryKey: true
     },
-    item_id: {
+    wallpaperId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -16,17 +16,14 @@ const ItemCategory = sequelize.define('item_category', {
             key: 'id'
         }
     },
-    category_id: {
+    categoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'categories',
+            model: 'category',
             key: 'id'
         }
     }
-}, {
-    timestamps: false,
-    tableName: 'item_categories'
 });
 
 module.exports = ItemCategory;
